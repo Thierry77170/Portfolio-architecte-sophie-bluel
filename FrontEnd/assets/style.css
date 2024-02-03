@@ -121,10 +121,6 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
-}
 .gallery {
 	width: 100%;
 	display: grid;
@@ -186,3 +182,140 @@ footer nav ul {
 	margin: 2em
 }
 
+
+
+/* Les rajouts de styles apportes pour les pages dynamiques */  
+nav a {
+	text-decoration: none;
+	color: #000000;
+}
+nav a:hover {	
+	color: #1D6154;
+}
+.headerLogin img {
+	width: 22px;
+	height: 22px;
+	color: #000000;
+}
+#portfolio h2 {
+	text-align: center;
+	margin: 130px 0px 70px 0px;
+	position: relative;
+}
+.linkEdit {
+	font-size: 14px;
+	text-decoration: none;
+	color: #000000;
+	padding-left: 60px;
+	position: absolute;
+	top: 8px;
+}
+.containerSorting {
+	margin-bottom: 60px;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+.btnSorting {
+	font-family: 'syne';
+	font-weight: 700;
+	font-size: 16px;
+	color: #1D6154;
+	height: 37px;
+	border: 1px #1D6154 solid;
+	border-radius: 60px;
+	background: #ffffff;
+	min-width: 120px;
+	padding: 0px 15px;
+	cursor: pointer;
+}
+.editMode {
+	font-family: 'Work sans';
+	font-weight: 400;
+	font-size: 16px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 59px;
+	background: #000000;
+	color: #ffffff;
+}
+html, body {
+	height: 100%;
+}
+.mainLogin {
+	height: 75%;
+	display: flex;	
+}
+.forgotYourPassword {
+	color: #000000;
+	display: inline-block;
+	width: 100%;
+}
+.forgotYourPassword:hover {
+	color: #1D6154;
+}
+.error {
+	margin-bottom: 33.6px;
+	text-align: center;
+}
+.modal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.modalWrapper {
+	border-radius: 10px;
+	background-color: #ffffff;
+	width: 760px;
+	max-width: calc(100vw - 20px);
+	height: 800px;
+	max-height: calc(100vw - 20px);
+}
+.textGaleriePhoto {
+	font-family: 'Work Sans';
+	font-weight: 400;
+	font-size: 26px;
+	padding: 8% 0%;
+	text-align: center;
+	position: relative;
+}
+.close {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+}
+.galleryModal {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 0px 15%;
+	gap: 2%;
+	margin-bottom: 5%;
+}
+.worksModale {	
+	width: 17%;
+	height: 120px;
+	margin-bottom: 35px;
+	border: 1px #000000 solid;
+}
+.modalLine {
+	border-bottom: #1D6154 1px solid;	
+	margin: 0% 15%;
+}
+.centerBtn {
+	display: flex;
+	justify-content: center;
+	padding: 3% 0%;
+}
+.modalWrapper .btnModalAdd {
+	border: none;
+	height: 36px;
+	width: 237px;
+}

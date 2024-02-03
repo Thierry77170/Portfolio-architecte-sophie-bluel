@@ -15,7 +15,7 @@
 <div class="blackHeaderRectangle">
 	<p class="editMode"><i class="fa-regular fa-pen-to-square"></i>Mode édition</p>
 </div>
-<header>
+<header class="headerLogin">
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
@@ -40,9 +40,8 @@
 	</section>
 	<section id="portfolio">
 		<div class="centeringH2">
-			<h2>Mes Projets</h2>
-			<a href="#modal" class="linkEdit"><i class="fa-regular fa-pen-to-square"></i>modifier</a>
-			<aside id="modal">
+			<h2>Mes Projets<a href="#modal" class="linkEdit"><i class="fa-regular fa-pen-to-square"></i>modifier</a></h2>		
+			<aside id="modal" class="modal">
 				<div class="modalWrapper">		
 					<p class="textGaleriePhoto">Galerie photo<span class="close"><i class="fa-solid fa-xmark"></i></span></p>
 					<div class="galleryModal">
@@ -61,7 +60,10 @@
 					<div class="modalLine">
 						<div class="line"></div>
 					</div>
-					<input type="submit" value="Ajouter une photo" class="btnForm btnModalAdd">
+					<div class="centerBtn">
+						<input type="submit" value="Ajouter une photo" class="btnForm btnModalAdd">
+					</div>
+					
 				</div>
 			</aside>
 		</div>
