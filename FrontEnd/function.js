@@ -161,9 +161,9 @@ async function loadingImagesForModal () {
         for (let i = 0; i < worksModaleTag.length; i++) {
             const imagesTags = document.createElement("img"); 
             imagesTags.src = imagesUrl[i];
-            // implémentation de la balise image[i] dans la balise parent 
+            // implémentation de la balise images[i] dans la balise parent 
             worksModaleTag[i].appendChild(imagesTags);
         }
     })
-    .catch(error => console.error("erreur lors de la récupération des données"));
+    //.catch(error => console.error("erreur lors de la récupération des données"));
 };

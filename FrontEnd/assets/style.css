@@ -210,6 +210,9 @@ nav a:hover {
 	position: absolute;
 	top: 8px;
 }
+.fa-regular {
+	margin-right: 10px;
+}
 .containerSorting {
 	margin-bottom: 60px;
 	display: flex;
