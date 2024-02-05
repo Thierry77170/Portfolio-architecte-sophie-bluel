@@ -290,6 +290,9 @@ html, body {
 	position: absolute;
 	top: 30px;
 	right: 30px;
+	cursor: pointer;
+	width: 24px;
+	height: 24px;
 }
 .galleryModal {
 	display: flex;
@@ -303,7 +306,10 @@ html, body {
 	width: 17%;
 	height: 120px;
 	margin-bottom: 35px;
-	border: 1px #000000 solid;
+}
+.worksModale img {
+	width: 100%;
+	height: 100%;
 }
 .modalLine {
 	border-bottom: #1D6154 1px solid;	

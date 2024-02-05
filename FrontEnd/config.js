@@ -27,3 +27,10 @@ const linkEditTag = document.querySelector(".linkEdit");
 
 // Variable pour récupérer le token lors de la connexion
 const token = JSON.parse(window.localStorage.getItem("token"));
+
+// Variable pour gérer la fermeture de la modale
+const closeModal = document.querySelector(".close");
+const openModal = document.getElementById("modal");
+const worksModaleTag = document.querySelectorAll(".worksModale");
+
+
