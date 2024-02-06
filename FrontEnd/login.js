@@ -1,9 +1,7 @@
 // On empêche le comportement par défaut "submit" et on gère la validation de la connexion de l'utilisateur
 formLogin.addEventListener("submit", (event) => {
-  
     // On empêche le comportement par défaut "submit" 
     event.preventDefault();
-  
     // On récupére les valeurs des champs pour obtenir le token
     emailValue = emailTag.value;
     motDePasseValue = motDePasseTag.value;
@@ -11,8 +9,6 @@ formLogin.addEventListener("submit", (event) => {
         email: emailValue, 
         password: motDePasseValue,
     }
-    console.log(credentials);
-
     //Variable pour la requête du login
     const req = {
         method: "POST",
@@ -22,7 +18,6 @@ formLogin.addEventListener("submit", (event) => {
             },
         body: JSON.stringify(credentials)
     };
-
     // Effectuer la requête POST avec fetch() pour se connecter
     fetch("http://localhost:5678/api/users/login", req)
     .then(res => {

@@ -67,3 +67,26 @@ linkEditTag.addEventListener("click", ()=> {
     openModal.style.display = "flex";  
 });
 
+
+
+
+
+
+
+
+
+
+
+console.log(".frameIcon0.value");
+
+// Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
+
+    //Variable pour la requête de la supression de l'image
+    const req = {
+        method: "DELETE",
+        headers: {
+            "accept" : "*/*",
+            },
+    };
+
+    

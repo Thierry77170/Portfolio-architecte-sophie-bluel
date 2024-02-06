@@ -153,17 +153,21 @@ async function loadingImagesForModal () {
     .then(dataWorks => {   
         const imagesUrl = dataWorks.map(work => work.imageUrl);         
         // Récupération des balises parents pour les images dans "config.js"        
-        // Effacement des éléments existants
-        worksModaleTag.forEach(btn => {
-            btn.innerHTML = "";
-        });
-        // Création de la balise image[i] et de la balise titre[i]
+        // Effacement des éléments existants     
+        // Création de la balise image[i] et de l'icone delete
         for (let i = 0; i < worksModaleTag.length; i++) {
             const imagesTags = document.createElement("img"); 
+            const spanDeleteTag = document.createElement("span");     
+            spanDeleteTag.classList.add("frameIcon" + [i]);     
+            const deleteTag = document.createElement("i");
+            deleteTag.classList.add("fa-solid");
+            deleteTag.classList.add("fa-trash-can");
             imagesTags.src = imagesUrl[i];
+            spanDeleteTag.appendChild(deleteTag);
             // implémentation de la balise images[i] dans la balise parent 
             worksModaleTag[i].appendChild(imagesTags);
+            worksModaleTag[i].appendChild(spanDeleteTag);
         }
     })
-    //.catch(error => console.error("erreur lors de la récupération des données"));
+    .catch(error => console.error("erreur lors de la récupération des données"));
 };
