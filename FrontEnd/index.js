@@ -67,17 +67,10 @@ linkEditTag.addEventListener("click", ()=> {
     openModal.style.display = "flex";  
 });
 
+const test = document.getElementsByClassName("frameIcon");
+console.log(test);
 
 
-
-
-
-
-
-
-
-
-console.log(".frameIcon0.value");
 
 // Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
 

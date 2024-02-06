@@ -158,7 +158,7 @@ async function loadingImagesForModal () {
         for (let i = 0; i < worksModaleTag.length; i++) {
             const imagesTags = document.createElement("img"); 
             const spanDeleteTag = document.createElement("span");     
-            spanDeleteTag.classList.add("frameIcon" + [i]);     
+            spanDeleteTag.classList.add("frameIcon");     
             const deleteTag = document.createElement("i");
             deleteTag.classList.add("fa-solid");
             deleteTag.classList.add("fa-trash-can");
