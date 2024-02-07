@@ -106,18 +106,18 @@ function deleteImage() {
             .then(dataWork => {
                 if (dataWork.status  === 200) {
                     console.log("suppression de l'image réussi");
-                }
-                
+                }           
             })
         });
     };
 };
 
-
+btnValiderTag.style.backgroundColor = "#A7A7A7";
 
 // Fonction pour gérer l'ajout d'images et titres dans la page d'accueil et dans la modale 
-
-
+//btnModalAddTag.addEventListener("click",(event) => {
+    //event.preventDefault
+//});
 
 
 

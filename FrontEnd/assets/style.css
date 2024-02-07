@@ -357,13 +357,13 @@ html, body {
 	justify-content: center;
 	padding: 3% 0%;
 }
-.modalWrapper .btnModalAdd {
+.modalWrapper .btnForm {
 	border: none;
 	height: 36px;
 	width: 237px;
 }
 
-.btnModalAdd {
+.btnForm {
 	cursor: pointer;
 }
 .centerTheElements {

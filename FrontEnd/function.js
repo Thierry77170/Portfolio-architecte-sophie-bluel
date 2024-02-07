@@ -138,10 +138,10 @@ function logoutUser() {
     window.localStorage.removeItem("token");
 };
 
-// Fonction pour les élements invisibles du index.html
+// Fonction pour rendre les élements invisibles du index.html visible si l'utilisateur est connecté
 function invisibleElements() {
     if (token) {
-        const token = window.sessionStorage.getItem("token");
+        //const token = window.sessionStorage.getItem("token");
         divBlackHeaderRectangle.style.display = "flex";
         linkEditTag.style.display = "flex";
     }

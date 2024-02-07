@@ -41,3 +41,4 @@ const frameIconTags = document.getElementsByClassName("frameIcon");
 
 // Variable pour gérer l'ajout d'images et titres dans la page d'accueil et dans la modale 
 const btnModalAddTag = document.querySelector(".btnModalAdd");
+const btnValiderTag = document.querySelector(".btnValider");

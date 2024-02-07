@@ -71,7 +71,7 @@
 				</div>
 			</aside>
 			<aside id="modal2" class="modal">
-				<div class="modalWrapper">		
+				<form class="modalWrapper">		
 					<p class="textGaleriePhoto">
 						Ajout photo
 						<span class="arrowLeft"><i class="fa-solid fa-arrow-left"></i></span>
@@ -85,17 +85,23 @@
 								<p class="textAjouterPhoto">+ Ajouter photo</p>
 							</button>
 							<label for="fileInput">jpg, png : 4mo max</label>
-						</div>				
-						
+						</div>
+						<label for="title">Titre</label>
+						<input type="text" id="title" name="title">
+						<label for="categorie">Catégorie :</label>
+						<select id="categorie" name="categorie">
+							<option value="Objets">Objets</option>
+							<option value="Appartements">Appartements</option>
+							<option value="Hotels&Restaurants">Hotels & restaurants</option>
+						</select>							
 					</div>
 					<div class="modalLine">
 						<div class="line"></div>
 					</div>
 					<div class="centerBtn">
-						<input type="submit" value="Valider" class="btnForm btnModalAdd">
-					</div>
-					
-				</div>
+						<input type="submit" value="Valider" class="btnForm btnValider">
+					</div>			
+				</form>
 			</aside>
 		</div>
 		<div class="containerSorting">
