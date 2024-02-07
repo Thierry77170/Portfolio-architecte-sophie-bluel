@@ -28,11 +28,16 @@ const linkEditTag = document.querySelector(".linkEdit");
 // Variable pour récupérer le token lors de la connexion
 const token = JSON.parse(window.localStorage.getItem("token"));
 
-// Variable pour gérer l'ouverture et la fermeture de la modale
+// Variable pour gérer l'ouverture et la fermeture des modales
 const closeModal = document.querySelector(".close");
 const openModal = document.getElementById("modal");
+const openModal2 = document.getElementById("modal2");
+const closeModal2 = document.querySelector(".close2");
 const worksModaleTag = document.querySelectorAll(".worksModale");
+const arrowLeftTag = document.querySelector(".arrowLeft");
 
 // Variable pour gérer la supression d'images dans la modale et la page d'accueil
+const frameIconTags = document.getElementsByClassName("frameIcon");
 
-
+// Variable pour gérer l'ajout d'images et titres dans la page d'accueil et dans la modale 
+const btnModalAddTag = document.querySelector(".btnModalAdd");

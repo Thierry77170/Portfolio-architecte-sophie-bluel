@@ -2,6 +2,9 @@
 btnActivated.style.backgroundColor = "#1D6154";
 btnActivated.style.color = "#ffffff";
 
+// Fonction pour afficher les éléments invisibles si l'utilisateur est connecté
+invisibleElements();
+
 // Fonction pour afficher les éléments au chargement de la page et de la modale
 btnTous();
 loadingImagesForModal ()
@@ -30,7 +33,7 @@ for (let i = 0; i < btnSorting.length; i++) {
 };
 
 // On empêche le comportement par défaut "submit"
- formIndex.addEventListener("submit", (event) => {
+formIndex.addEventListener("submit", (event) => {
     event.preventDefault();
 });
 
@@ -47,39 +50,77 @@ document.addEventListener("DOMContentLoaded", () => {
             logoutUser();
             window.location.href = "index.html";
         });  
-    } else if (!token) {
-        invisibleElements();
-    }   
+    } 
 });
 
 
-// Gestion de la modale
-// Modale invisible par défault
-openModal.style.display ="none";
-
-// Fermeture de la modale au click sur la croix
+// Gestion des modales
+// Modales invisibles par défault géré par le CSS
+// Fermeture des modales au click sur les croix
 closeModal.addEventListener("click", ()=> {
     openModal.style.display = "none";
 });
+closeModal2.addEventListener("click", ()=> {
+    openModal.style.display = "none";
+    openModal2.style.display = "none";
+});
 
-// Ouverture de la madale au click sur le lien "modofier" et chargement des images 
+// Ouverture des modales au click sur le lien "modofier" et au bouton "Ajouter photo" 
 linkEditTag.addEventListener("click", ()=> {
     openModal.style.display = "flex";  
 });
+btnModalAddTag.addEventListener("click", ()=> {
+    openModal2.style.display = "flex"; 
+});
 
-const test = document.getElementsByClassName("frameIcon");
-console.log(test);
+// Retour sur la modale précédente
+arrowLeftTag.addEventListener("click", ()=> {
+    openModal2.style.display = "none";
+    openModal.style.display = "flex"; 
+});
 
 
 
 // Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
+console.log(frameIconTags);
 
-    //Variable pour la requête de la supression de l'image
-    const req = {
-        method: "DELETE",
-        headers: {
-            "accept" : "*/*",
-            },
+function deleteImage() {
+    for (i = 0; i <  frameIconTags.length; i++) {
+        //Variable pour la requête de la supression de l'image
+        const req = {
+            method: "DELETE",
+            headers: {
+                "accept" : "*/*",
+                "Authorization" : `Bearer ${token}`,
+                },
+        };
+
+        frameIconTags[i].addEventListener("click", (event) => {
+            fetch(`http://localhost:5678/api/works/` + [i], req) 
+            .then(res => {
+                if (res.status  !== 200) {
+                    console.log("suppression de l'image échoué")
+                }
+                return res.json()
+            })
+            .then(dataWork => {
+                if (dataWork.status  === 200) {
+                    console.log("suppression de l'image réussi");
+                }
+                
+            })
+        });
     };
+};
+
+
+
+// Fonction pour gérer l'ajout d'images et titres dans la page d'accueil et dans la modale 
+
+
+
+
+
+    
 
     

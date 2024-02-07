@@ -37,7 +37,6 @@ formLogin.addEventListener("submit", (event) => {
     })
     .then(data => {
         const token = data.token;
-        
         // Stocker le token dans le localStorage
         window.localStorage.setItem("token", JSON.stringify(token));
         window.location.href = "index.html";

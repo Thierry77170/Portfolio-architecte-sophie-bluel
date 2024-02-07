@@ -184,7 +184,13 @@ footer nav ul {
 
 
 
-/* Les rajouts de styles apportes pour les pages dynamiques */  
+/* Les rajouts de styles apportes pour les pages dynamiques */ 
+.blackHeaderRectangle {
+	display: none;
+} 
+.linkEdit {
+	display: none;
+}
 nav a {
 	text-decoration: none;
 	color: #000000;
@@ -209,8 +215,9 @@ nav a:hover {
 	padding-left: 60px;
 	position: absolute;
 	top: 8px;
+	right: 28%;
 }
-.fa-regular {
+.linkEdit .fa-regular {
 	margin-right: 10px;
 }
 .containerSorting {
@@ -242,6 +249,7 @@ nav a:hover {
 	height: 59px;
 	background: #000000;
 	color: #ffffff;
+	width: 100%;
 }
 html, body {
 	height: 100%;
@@ -269,7 +277,7 @@ html, body {
 	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.3);
-	display: flex;
+	display: none;
 	justify-content: center;
 	align-items: center;
 }
@@ -289,13 +297,20 @@ html, body {
 	text-align: center;
 	position: relative;
 }
-.close {
+.close, 
+.close2 {
 	position: absolute;
 	top: 30px;
 	right: 30px;
 	cursor: pointer;
 	width: 24px;
 	height: 24px;
+}
+.arrowLeft {
+	position: absolute;
+	top: 30px;
+	left: 30px;
+	cursor: pointer;
 }
 .galleryModal {
 	display: flex;
@@ -346,4 +361,64 @@ html, body {
 	border: none;
 	height: 36px;
 	width: 237px;
+}
+
+.btnModalAdd {
+	cursor: pointer;
+}
+.centerTheElements {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+.frameToAddImage {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 420px;
+	max-width: calc(100vw - 15%);
+	height: 169px;
+	background-color: #E8F1F6;
+}
+.frameToAddImage .fa-regular {
+	font-size: 76px;
+	margin-bottom: 5px;
+	color: #CBD6DC;
+}
+.frameToAddImage input[type="file"] {
+	width: 173px;
+	height: 36px;
+	opacity: 0;
+	border-radius: 50px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 1;
+	cursor: pointer;
+}
+.frameToAddImage button {
+	width: 173px;
+	height: 36px;
+	border-radius: 50px;
+	border: none;
+	padding: 0px;
+	position: relative;
+	z-index: 0;
+	margin-bottom: 8px;
+	background-color: #CBD6DC;
+}
+.frameToAddImage label {
+	font-size: 10px;
+	color: #444444;
+}
+.textAjouterPhoto {
+	width: 173px;
+	height: 36px;
+	position: absolute;
+	top: -1px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #306685;
 }

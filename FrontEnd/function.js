@@ -61,7 +61,6 @@ async function btnObjets () {
         worksTags.forEach(btn => {
             btn.innerHTML = "";
         });
-
         // Création de la balise image[i] et de la balise titre[i]
         for (let i = 0; i < filteredObjects.length; i++) {
             const imagesTags = document.createElement("img"); 
@@ -141,8 +140,11 @@ function logoutUser() {
 
 // Fonction pour les élements invisibles du index.html
 function invisibleElements() {
-    divBlackHeaderRectangle.style.display = "none";
-    linkEditTag.style.display = "none";
+    if (token) {
+        const token = window.sessionStorage.getItem("token");
+        divBlackHeaderRectangle.style.display = "flex";
+        linkEditTag.style.display = "flex";
+    }
 };
 
 // Fonction pour gérer l'affichage des images de la modale
@@ -168,6 +170,7 @@ async function loadingImagesForModal () {
             worksModaleTag[i].appendChild(imagesTags);
             worksModaleTag[i].appendChild(spanDeleteTag);
         }
+        deleteImage();
     })
-    .catch(error => console.error("erreur lors de la récupération des données"));
+    //.catch(error => console.error("erreur lors de la récupération des données"));
 };

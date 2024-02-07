@@ -40,7 +40,12 @@
 	</section>
 	<section id="portfolio">
 		<div class="centeringH2">
-			<h2>Mes Projets<a href="#modal" class="linkEdit"><i class="fa-regular fa-pen-to-square"></i>modifier</a></h2>		
+			<h2>Mes Projets
+				<a href="#modal" class="linkEdit">
+					<i class="fa-regular fa-pen-to-square"></i>
+					modifier
+				</a>
+			</h2>		
 			<aside id="modal" class="modal">
 				<div class="modalWrapper">		
 					<p class="textGaleriePhoto">Galerie photo<span class="close"><i class="fa-solid fa-xmark"></i></span></p>
@@ -62,6 +67,32 @@
 					</div>
 					<div class="centerBtn">
 						<input type="submit" value="Ajouter une photo" class="btnForm btnModalAdd">
+					</div>		
+				</div>
+			</aside>
+			<aside id="modal2" class="modal">
+				<div class="modalWrapper">		
+					<p class="textGaleriePhoto">
+						Ajout photo
+						<span class="arrowLeft"><i class="fa-solid fa-arrow-left"></i></span>
+						<span class="close2"><i class="fa-solid fa-xmark"></i></span>
+					</p>
+					<div class="centerTheElements">
+						<div class="frameToAddImage">
+							<i class="fa-regular fa-image"></i>
+							<button>
+								<input type="file" id="fileInput" name="fileInput" accept=".jpg, .png" size="4000000">
+								<p class="textAjouterPhoto">+ Ajouter photo</p>
+							</button>
+							<label for="fileInput">jpg, png : 4mo max</label>
+						</div>				
+						
+					</div>
+					<div class="modalLine">
+						<div class="line"></div>
+					</div>
+					<div class="centerBtn">
+						<input type="submit" value="Valider" class="btnForm btnModalAdd">
 					</div>
 					
 				</div>
