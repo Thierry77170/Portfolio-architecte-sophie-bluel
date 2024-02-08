@@ -39,6 +39,15 @@ const arrowLeftTag = document.querySelector(".arrowLeft");
 // Variable pour gérer la supression d'images dans la modale et la page d'accueil
 const frameIconTags = document.getElementsByClassName("frameIcon");
 
-// Variable pour gérer l'ajout d'images et titres dans la page d'accueil et dans la modale 
+// Variable pour gérer l'ajout d'images et de titres dans la page d'accueil et dans la modale 
 const btnModalAddTag = document.querySelector(".btnModalAdd");
 const btnValiderTag = document.querySelector(".btnValider");
+
+// Variable pour gérer le changement de couleur du Bouton "Valider" de la modale 2
+//const btnSubmitTag = document.getElementById("btnSubmit");
+const formToAddImageTag = document.getElementById("formToAddImage");
+const fileInputTag = document.getElementById("fileInput");
+const titleTag = document.getElementById("title");
+const categorieTag = document.getElementById("categorie");
+const previewImageTag = document.getElementById('previewImage');
+

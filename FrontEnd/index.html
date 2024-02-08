@@ -71,7 +71,7 @@
 				</div>
 			</aside>
 			<aside id="modal2" class="modal">
-				<form class="modalWrapper">		
+				<form class="modalWrapper" id="formToAddImage">		
 					<p class="textGaleriePhoto">
 						Ajout photo
 						<span class="arrowLeft"><i class="fa-solid fa-arrow-left"></i></span>
@@ -85,21 +85,23 @@
 								<p class="textAjouterPhoto">+ Ajouter photo</p>
 							</button>
 							<label for="fileInput">jpg, png : 4mo max</label>
+							<img id="previewImage" src="#" alt="Aperçu de l'image">
 						</div>
-						<label for="title">Titre</label>
-						<input type="text" id="title" name="title">
-						<label for="categorie">Catégorie :</label>
+						<label for="title" class="textStyle">Titre</label>
+						<input type="text" id="title" name="title" class="inputModal2">
+						<label for="categorie" class="textStyle">Catégorie :</label>
 						<select id="categorie" name="categorie">
+							<option value=""></option>
 							<option value="Objets">Objets</option>
 							<option value="Appartements">Appartements</option>
 							<option value="Hotels&Restaurants">Hotels & restaurants</option>
 						</select>							
 					</div>
-					<div class="modalLine">
+					<div class="modalLine lineStyle">
 						<div class="line"></div>
 					</div>
 					<div class="centerBtn">
-						<input type="submit" value="Valider" class="btnForm btnValider">
+						<input type="submit" value="Valider" class="btnForm btnValider" id="btnSubmit">
 					</div>			
 				</form>
 			</aside>

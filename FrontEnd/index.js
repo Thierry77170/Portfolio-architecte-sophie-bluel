@@ -48,7 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
         // Ajouter un événement de clic pour gérer la déconnexion
         logout.addEventListener("click", () => {
             logoutUser();
-            window.location.href = "index.html";
         });  
     } 
 });
@@ -82,8 +81,6 @@ arrowLeftTag.addEventListener("click", ()=> {
 
 
 // Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
-console.log(frameIconTags);
-
 function deleteImage() {
     for (i = 0; i <  frameIconTags.length; i++) {
         //Variable pour la requête de la supression de l'image
@@ -94,7 +91,6 @@ function deleteImage() {
                 "Authorization" : `Bearer ${token}`,
                 },
         };
-
         frameIconTags[i].addEventListener("click", (event) => {
             fetch(`http://localhost:5678/api/works/` + [i], req) 
             .then(res => {
@@ -112,12 +108,106 @@ function deleteImage() {
     };
 };
 
+
+
+// Fonction pour gérer le changement de couleur du Bouton "Valider" de la modale 2
+
+
+
+
+
+
+
+
+
+// On écoute le changement dans le champ input="file"
+fileInputTag.addEventListener("change", (event) => {
+    // On vérifie d'abord si un fichier a été sélectionné en accédant à event.target.files[0]
+    const selectedFile = event.target.files[0];
+    
+    if (selectedFile) {
+        // On utilise FileReader pour lire le contenu du fichier sélectionné en tant qu'URL de données (data URL)
+        const reader = new FileReader();
+
+        // On applique la propriété onload qui met à jour la source de l'image de prévisualisation
+        reader.onload = (e) => {
+            previewImage.src = e.target.result;
+            previewImage.style.display = 'block';
+        };
+
+        //  On lit le contenu du fichier spécifié en tant qu'URL de données (data URL).
+        reader.readAsDataURL(selectedFile);
+    } else {
+        previewImage.src = '#';
+        previewImage.style.display = 'none';
+    }
+});
+
+formToAddImageTag.addEventListener("submit", (event) => {
+    event.preventDefault();
+ 
+    const fileInputValue = fileInputTag.value;
+    const titleValue = titleTag.value;
+    const categorieValue = categorieTag.value;
+    
+    const allFieldsFilled = {
+        imageUrl: fileInputValue,
+        title: titleValue,
+        category: categorieValue,
+    }
+    console.log(allFieldsFilled);
+});
+
+
+
+
+
+
+
+
+
+
+
+// Fonction pour vérifier si tous les champs sont remplis
+function checkingFields() {
+    let allFieldsFilled = true;
+    allFieldsModal2.forEach(field => {
+        if (field.value.trim() === "") {
+            allFieldsFilled = false;
+        }
+    }); 
+    return allFieldsFilled;
+};
+
+// Fonction pour mettre à jour la couleur du bouton
 btnValiderTag.style.backgroundColor = "#A7A7A7";
+function updateBtnColor() {
+    if (checkingFields()) {
+        btnSubmitTag.classList.add("filled"); // Rempli
+    } else {
+        btnSubmitTag.classList.remove("filled");
+    }
+};
+
+
+//updateBtnColor();
 
 // Fonction pour gérer l'ajout d'images et titres dans la page d'accueil et dans la modale 
-//btnModalAddTag.addEventListener("click",(event) => {
-    //event.preventDefault
-//});
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 
 
 
