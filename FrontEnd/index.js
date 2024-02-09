@@ -82,6 +82,8 @@ arrowLeftTag.addEventListener("click", ()=> {
 
 
 
+
+
 // Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
 function deleteImage() {
     for (i = 0; i <  frameIconTags.length; i++) {
@@ -141,16 +143,75 @@ fileInputTag.addEventListener("change", (event) => {
 // On écoute l'évènement "submite" pour créer un nouveau work dans la base de données
 formToAddImageTag.addEventListener("submit", (event) => {
     event.preventDefault();
-    const fileInputValue = fileInputTag.value;
+
+    // On récupére le fichier image sélectionné par l'utilisateur
+    const imageFile = previewImageTag;
     const titleValue = titleTag.value;
     const categorieValue = categorieTag.value;
-    const allFieldsFilled = {
-        imageUrl: fileInputValue,
+    //console.log(imageFile); 
+    //console.log(titleValue);
+    //console.log(categorieValue); 
+
+    const newWork = {
+        image: imageFile, 
         title: titleValue,
-        category: categorieValue,
+        category: categorieValue
     }
-    console.log(allFieldsFilled);
+    console.log(newWork);
+ 
+    //Variable pour la requête 
+    const req = {
+        method: "POST",
+        headers: {
+            "accept" : "application/json",
+            "Content-Type": "multipart/form-data",
+            "Authorization" : `Bearer ${token}`,
+            },
+        body: JSON.stringify(newWork)
+    };
+    // Effectuer la requête POST avec fetch() pour créer un nouveau work
+    fetch("http://localhost:5678/api/works", req)
+    .then(res => {
+        return res.json();
+    })
+    .then(dataWork => {   
+        // Traitement de la réponse serveur
+        const imagesUrl = dataWork.imageUrl;         
+        const title = dataWork.title;    
+        // Création des balises images avec et sans l'icone delete pour la modale
+        const figureTagModal = document.createElement("figure"); 
+        figureTagModal.classList.add("worksModale");
+        const imagesTags = document.createElement("img"); 
+        imagesTags.src = imagesUrl;
+        console.log(imagesTags);
+        const images2Tags = document.createElement("img"); 
+        images2Tags.src = imagesUrl;
+        console.log(images2Tags);
+        const spanDeleteTag = document.createElement("span");     
+        spanDeleteTag.classList.add("frameIcon");
+        const deleteTag = document.createElement("i");
+        deleteTag.classList.add("fa-solid, fa-trash-can");
+        spanDeleteTag.appendChild(deleteTag);
+        // implémentation de la balise image dans la balise parent pour la modale
+        galleryModalTag.appendChild(figureTagModal); 
+        worksModaleTag.appendChild(imagesTags);
+        worksModaleTag.appendChild(spanDeleteTag);
+        
+        // Création des balises image et titre pour la page d'accueil
+        const figureTag = document.createElement("figure"); 
+        figureTag.classList.add("works");
+        figureTag.appendChild(imagesTags);
+        const figcaptionTag = document.createElement("figcaption"); 
+        figcaptionTag.innerText = title;    
+        // implémentation des balises image et titre dans la page d'accueil
+        galleryTag.appendChild(figureTag);
+        figureTag.appendChild(images2Tags);
+        figureTag.appendChild(figcaptionTag);    
+    })
+    //.catch(error => console.error("erreur lors de la récupération des données"));
 });
+    
+
 
 
 
@@ -161,35 +222,6 @@ formToAddImageTag.addEventListener("submit", (event) => {
 btnValiderTag.style.backgroundColor = "#A7A7A7";
 
 
-
-// Fonction pour vérifier si tous les champs sont remplis
-function checkingFields() {
-    const allFieldsFilled = {
-        imageUrl: fileInputValue,
-        title: titleValue,
-        category: categorieValue,
-    }
-    let allFieldsFilledModal2 = true;
-    allFieldsFilled.forEach(field => {
-        if (field.value.trim() === "") {
-            allFieldsFilled = false;
-        } 
-    }); 
-    return allFieldsFilled;
-};
-
-// Fonction pour mettre à jour la couleur du bouton
-function updateBtnColor() {
-    if (checkingFields()) {
-        btnSubmitTag.classList.add("filled"); // Rempli
-    } else {
-        btnSubmitTag.classList.remove("filled");
-    }
-};
-
-
-
-// Fonction pour gérer l'ajout d'images et titres dans la page d'accueil et dans la modale 
 
 
 

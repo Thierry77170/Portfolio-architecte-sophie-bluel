@@ -350,6 +350,9 @@ html, body {
 }
 .modalLine {
 	border-bottom: #1D6154 1px solid;	
+	width: 70%;
+	max-width: calc(100vw - 15%);
+	margin: auto;
 }
 .centerBtn {
 	display: flex;
@@ -453,9 +456,6 @@ html, body {
 	max-width: calc(100vw - 15%);
 	margin: auto;
 	margin-top: 8%;
-}
-.line {
-	width: 100%;
 }
 .filled {
 	background-color: #1D6154;
