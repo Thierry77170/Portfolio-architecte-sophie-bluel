@@ -25,27 +25,29 @@ async function getWorks() {
     await fetch("http://localhost:5678/api/works")
     .then(reponse => reponse.json())
     .then(dataWorks => {   
-        const imagesUrl = dataWorks.map(work => work.imageUrl);  
+        const imagesUrl = dataWorks.map(work => work.imageUrl); 
         const title = dataWorks.map(work => work.title);        
         // Récupération des balises parents pour les images et les titres dans "config.js"        
         // Effacement des éléments existants
-        worksTags.forEach(btn => {
-            btn.innerHTML = "";
-        });
+        galleryTag.innerHTML = "";       
         // Création de la balise image[i] et de la balise titre[i]
-        for (let i = 0; i < worksTags.length; i++) {
-            const imagesTags = document.createElement("img"); 
-            imagesTags.src = imagesUrl[i];
+        for (let i = 0; i < imagesUrl.length; i++) {
+            const figureTag = document.createElement("figure");
+            const imagesTags = document.createElement("img");
             const figcaptionTitle = document.createElement("figcaption"); 
+
+            figureTag.classList.add("works");
+            imagesTags.src = imagesUrl[i];  
             figcaptionTitle.innerText = title[i];
-            // implémentation de la balise image[i] et de la balise titre[i]  dans la balise parent 
-            worksTags[i].appendChild(imagesTags);
-            worksTags[i].appendChild(figcaptionTitle);
+
+            // implémentation de la balise image[i] et de la balise titre[i]  dans la balise parent
+            figureTag.appendChild(imagesTags);
+            figureTag.appendChild(figcaptionTitle); 
+            galleryTag.appendChild(figureTag);      
         }
     })
     .catch(error => console.error("erreur lors de la récupération des données"));
 };
-
 
 // Fonction pour gérer le bouton "Objets" du filtre au click
 async function btnObjets () {
@@ -58,18 +60,22 @@ async function btnObjets () {
         const resultsTitles = filteredObjects.map(work => work.title);       
         // Récupération des balises parents pour les images et les titres dans "config.js"
         // Effacement des éléments existants
-        worksTags.forEach(btn => {
-            btn.innerHTML = "";
-        });
+        galleryTag.innerHTML = ""; 
         // Création de la balise image[i] et de la balise titre[i]
         for (let i = 0; i < filteredObjects.length; i++) {
-            const imagesTags = document.createElement("img"); 
-            imagesTags.src = resultsImages[i];
+            const figureTag = document.createElement("figure");
+            console.log(figureTag);
+            const imagesTags = document.createElement("img");
             const figcaptionTitle = document.createElement("figcaption"); 
+
+            figureTag.classList.add("work");
+            imagesTags.src = resultsImages[i];  
             figcaptionTitle.innerText = resultsTitles[i];
-            // implémentation de la balise image[i] et de la balise titre[i]  dans la balise parent 
-            worksTags[i].appendChild(imagesTags);
-            worksTags[i].appendChild(figcaptionTitle);
+
+            // implémentation de la balise image[i] et de la balise titre[i]  dans la balise parent
+            figureTag.appendChild(imagesTags);
+            figureTag.appendChild(figcaptionTitle); 
+            galleryTag.appendChild(figureTag); 
         }
     })
     .catch(error => console.error("erreur lors de la récupération des données"));
@@ -87,18 +93,22 @@ async function btnAppartements () {
         const resultsTitles = filteredAppartements.map(work => work.title);      
         // Récupération des balises parents pour les images et les titres dans "config.js"
         // Effacement des éléments existants
-        worksTags.forEach(btn => {
-            btn.innerHTML = "";
-        });
+        galleryTag.innerHTML = ""; 
         // Création de la balise image[i] et de la balise titre[i]
         for (let i = 0; i < filteredAppartements.length; i++) {
-            const imagesTags = document.createElement("img"); 
-            imagesTags.src = resultsImages[i];
+            const figureTag = document.createElement("figure");
+            console.log(figureTag);
+            const imagesTags = document.createElement("img");
             const figcaptionTitle = document.createElement("figcaption"); 
+
+            figureTag.classList.add("works");
+            imagesTags.src = resultsImages[i];  
             figcaptionTitle.innerText = resultsTitles[i];
-            // implémentation de la balise image[i] et de la balise titre[i]  dans la balise parent 
-            worksTags[i].appendChild(imagesTags);
-            worksTags[i].appendChild(figcaptionTitle);
+
+            // implémentation de la balise image[i] et de la balise titre[i]  dans la balise parent
+            figureTag.appendChild(imagesTags);
+            figureTag.appendChild(figcaptionTitle); 
+            galleryTag.appendChild(figureTag);    
         }
     })
     .catch(error => console.error("erreur lors de la récupération des données"));
@@ -115,18 +125,22 @@ async function btnHotelEtResto () {
         const resultsTitles = filteredHotelEtResto.map(work => work.title);       
         // Récupération des balises parents pour les images et les titres dans "config.js"
         // Effacement des éléments existants
-        worksTags.forEach(btn => {
-            btn.innerHTML = "";
-        });
+        galleryTag.innerHTML = ""; 
         // Création de la balise image[i] et de la balise titre[i]
         for (let i = 0; i < filteredHotelEtResto.length; i++) {
-            const imagesTags = document.createElement("img"); 
-            imagesTags.src = resultsImages[i];
+            const figureTag = document.createElement("figure");
+            console.log(figureTag);
+            const imagesTags = document.createElement("img");
             const figcaptionTitle = document.createElement("figcaption"); 
+
+            figureTag.classList.add("works");
+            imagesTags.src = resultsImages[i];  
             figcaptionTitle.innerText = resultsTitles[i];
-            // implémentation de la balise image[i] et de la balise titre[i]  dans la balise parent 
-            worksTags[i].appendChild(imagesTags);
-            worksTags[i].appendChild(figcaptionTitle);
+
+            // implémentation de la balise image[i] et de la balise titre[i]  dans la balise parent
+            figureTag.appendChild(imagesTags);
+            figureTag.appendChild(figcaptionTitle); 
+            galleryTag.appendChild(figureTag);   
         }
     })
     .catch(error => console.error("erreur lors de la récupération des données"));
@@ -155,21 +169,26 @@ async function loadingImagesForModal () {
     .then(dataWorks => {   
         const imagesUrl = dataWorks.map(work => work.imageUrl);         
         // Récupération des balises parents pour les images dans "config.js"            
-        // Création de la balise image[i] et de l'icone delete
-        for (let i = 0; i < worksModaleTag.length; i++) {
-            const imagesTags = document.createElement("img"); 
-            const spanDeleteTag = document.createElement("span");     
-            spanDeleteTag.classList.add("frameIcon");     
+        // Création des balises image[i] et de l'icone delete
+        for (let i = 0; i < imagesUrl.length; i++) {
+            const figureTag = document.createElement("figure");
+            const imagesTags = document.createElement("img");
+            const spanDeleteTag = document.createElement("span"); 
             const deleteTag = document.createElement("i");
+            
+            figureTag.classList.add("worksModale");
+            imagesTags.src = imagesUrl[i];  
+            spanDeleteTag.classList.add("frameIcon"); 
             deleteTag.classList.add("fa-solid");
             deleteTag.classList.add("fa-trash-can");
-            imagesTags.src = imagesUrl[i];
+            
+            // implémentation des balises image[i]  dans la modale
             spanDeleteTag.appendChild(deleteTag);
-            // implémentation de la balise images[i] dans la balise parent 
-            worksModaleTag[i].appendChild(imagesTags);
-            worksModaleTag[i].appendChild(spanDeleteTag);
+            figureTag.appendChild(imagesTags);
+            figureTag.appendChild(spanDeleteTag); 
+            galleryModalTag.appendChild(figureTag);   
         }
         deleteImage();
     })
-    //.catch(error => console.error("erreur lors de la récupération des données"));
+    .catch(error => console.error("erreur lors de la récupération des données"));
 };
