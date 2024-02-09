@@ -20,7 +20,7 @@ function bgChange (i) {
 };
 
 // Fonction pour gérer le bouton "Tous" du filtre au click
-async function btnTous () {
+async function getWorks() {
     // Récupération des images et titres par l'API
     await fetch("http://localhost:5678/api/works")
     .then(reponse => reponse.json())
@@ -154,8 +154,7 @@ async function loadingImagesForModal () {
     .then(reponse => reponse.json())
     .then(dataWorks => {   
         const imagesUrl = dataWorks.map(work => work.imageUrl);         
-        // Récupération des balises parents pour les images dans "config.js"        
-        // Effacement des éléments existants     
+        // Récupération des balises parents pour les images dans "config.js"            
         // Création de la balise image[i] et de l'icone delete
         for (let i = 0; i < worksModaleTag.length; i++) {
             const imagesTags = document.createElement("img"); 

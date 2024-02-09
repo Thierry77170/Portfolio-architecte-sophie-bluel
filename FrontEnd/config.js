@@ -3,7 +3,7 @@ let btnActivated = document.querySelector(".activated");
 let btnSorting = document.querySelectorAll(".btnSorting");
 
 // Récupération des balises parents des éléments pour les fonctions des filtres
-let worksTags = document.querySelectorAll(".works");
+const worksTags = document.querySelectorAll(".works");
 
 // On récupère la balise form du fichier "index.html" pour empêcher le comportement par défaut "submit"
 const formIndex = document.getElementById("formIndex");  

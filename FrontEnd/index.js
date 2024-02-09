@@ -6,7 +6,7 @@ btnActivated.style.color = "#ffffff";
 invisibleElements();
 
 // Fonction pour afficher les éléments au chargement de la page et de la modale
-btnTous();
+getWorks();
 loadingImagesForModal ()
 
 // Évènement pour gérer le click des filtres
@@ -15,7 +15,7 @@ for (let i = 0; i < btnSorting.length; i++) {
         bgChange (i);
         // Application de la fonction btnTous uniquement au premier bouton
         if (i === 0) {
-            btnTous();  
+            getWorks();  
         }  
         // Application de la fonction btnObjets uniquement au premier bouton
         if (i === 1) {
@@ -84,50 +84,20 @@ arrowLeftTag.addEventListener("click", ()=> {
 
 
 
-// Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
-function deleteImage() {
-    for (i = 0; i <  frameIconTags.length; i++) {
-        //Variable pour la requête de la supression de l'image
-        const req = {
-            method: "DELETE",
-            headers: {
-                "accept" : "*/*",
-                "Authorization" : `Bearer ${token}`,
-                },
-        };
-        frameIconTags[i].addEventListener("click", (event) => {
-            fetch(`http://localhost:5678/api/works/` + [i], req) 
-            .then(res => {
-                if (res.status  !== 200) {
-                    console.log("suppression de l'image échoué")
-                }
-                return res.json()
-            })
-            .then(dataWork => {
-                if (dataWork.status  === 200) {
-                    console.log("suppression de l'image réussi");
-                }           
-            })
-        });
-    };
-};
 
 
 // On écoute le changement dans le champ input="file" pour afficher la previewImage
 fileInputTag.addEventListener("change", (event) => {
     // On vérifie d'abord si un fichier a été sélectionné en accédant à event.target.files[0]
     const selectedFile = event.target.files[0];
-    
     if (selectedFile) {
         // On utilise FileReader pour lire le contenu du fichier sélectionné en tant qu'URL de données (data URL)
         const reader = new FileReader();
-
         // On applique la propriété onload qui met à jour la source de l'image de prévisualisation
         reader.onload = (e) => {
             previewImage.src = e.target.result;
             previewImage.style.display = 'block';
         };
-
         //  On lit le contenu du fichier spécifié en tant qu'URL de données (data URL).
         reader.readAsDataURL(selectedFile);
     } else {
@@ -135,6 +105,8 @@ fileInputTag.addEventListener("change", (event) => {
         previewImage.style.display = 'none';
     }
 });
+
+
 
 
 
@@ -178,35 +150,37 @@ formToAddImageTag.addEventListener("submit", (event) => {
         // Traitement de la réponse serveur
         const imagesUrl = dataWork.imageUrl;         
         const title = dataWork.title;    
-        // Création des balises images avec et sans l'icone delete pour la modale
+
+        // Création des balises images avec l'icone delete pour la modale
         const figureTagModal = document.createElement("figure"); 
-        figureTagModal.classList.add("worksModale");
-        const imagesTags = document.createElement("img"); 
-        imagesTags.src = imagesUrl;
+        const imagesTags = document.createElement("img");
         console.log(imagesTags);
-        const images2Tags = document.createElement("img"); 
-        images2Tags.src = imagesUrl;
-        console.log(images2Tags);
-        const spanDeleteTag = document.createElement("span");     
-        spanDeleteTag.classList.add("frameIcon");
+        const spanDeleteTag = document.createElement("span");
         const deleteTag = document.createElement("i");
+      
+        figureTagModal.classList.add("worksModale");   
+        imagesTags.src = imagesUrl;      
+        spanDeleteTag.classList.add("frameIcon");
         deleteTag.classList.add("fa-solid, fa-trash-can");
-        spanDeleteTag.appendChild(deleteTag);
-        // implémentation de la balise image dans la balise parent pour la modale
+
         galleryModalTag.appendChild(figureTagModal); 
-        worksModaleTag.appendChild(imagesTags);
-        worksModaleTag.appendChild(spanDeleteTag);
-        
-        // Création des balises image et titre pour la page d'accueil
+        figureTagModal.appendChild(imagesTags);
+        figureTagModal.appendChild(spanDeleteTag);
+        spanDeleteTag.appendChild(deleteTag);
+
+        // Création des balises images avec les titres pour la page d'accueil
         const figureTag = document.createElement("figure"); 
-        figureTag.classList.add("works");
-        figureTag.appendChild(imagesTags);
+        const images2Tags = document.createElement("img"); 
+        console.log(images2Tags);
         const figcaptionTag = document.createElement("figcaption"); 
-        figcaptionTag.innerText = title;    
-        // implémentation des balises image et titre dans la page d'accueil
+
+        figureTag.classList.add("works");
+        images2Tags.src = imagesUrl;
+        figcaptionTag.innerText = title; 
+        
         galleryTag.appendChild(figureTag);
         figureTag.appendChild(images2Tags);
-        figureTag.appendChild(figcaptionTag);    
+        figureTag.appendChild(figcaptionTag);
     })
     //.catch(error => console.error("erreur lors de la récupération des données"));
 });
@@ -218,12 +192,52 @@ formToAddImageTag.addEventListener("submit", (event) => {
 
 
 
+
+
+// Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
+function deleteImage() {
+    for (i = 0; i <  frameIconTags.length; i++) {
+        //Variable pour la requête de la supression de l'image
+        const req = {
+            method: "DELETE",
+            headers: {
+                "accept" : "*/*",
+                "Authorization" : `Bearer ${token}`,
+                },
+        };
+        frameIconTags[i].addEventListener("click", (event) => {
+            fetch(`http://localhost:5678/api/works/` + [i], req) 
+            .then(res => {
+                if (res.status  !== 200) {
+                    console.log("suppression de l'image échoué")
+                }
+                return res.json()
+            })
+            .then(dataWork => {
+                if (dataWork.status  === 200) {
+                    console.log("suppression de l'image réussi");
+                    if (worksTags === "") {
+                        // Suppression des balises images avec les titres pour la page d'accueil
+                        galleryTag.removeChild(worksTags);
+                    }
+                    if (worksModaleTag === "") {
+                        // Suppression des balises images avec pour la modale
+                        worksModaleTag.removeChild(worksTags);
+                    }
+                    
+                }           
+            })
+        });
+    };
+};
+
+
+
+
+
+
 // Fonction pour gérer le changement de couleur du Bouton "Valider" de la modale 2
 btnValiderTag.style.backgroundColor = "#A7A7A7";
-
-
-
-
 
 
 
