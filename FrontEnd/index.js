@@ -80,6 +80,8 @@ arrowLeftTag.addEventListener("click", ()=> {
 
 
 
+
+
 // Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
 function deleteImage() {
     for (i = 0; i <  frameIconTags.length; i++) {
@@ -109,18 +111,7 @@ function deleteImage() {
 };
 
 
-
-// Fonction pour gérer le changement de couleur du Bouton "Valider" de la modale 2
-
-
-
-
-
-
-
-
-
-// On écoute le changement dans le champ input="file"
+// On écoute le changement dans le champ input="file" pour afficher la previewImage
 fileInputTag.addEventListener("change", (event) => {
     // On vérifie d'abord si un fichier a été sélectionné en accédant à event.target.files[0]
     const selectedFile = event.target.files[0];
@@ -143,13 +134,16 @@ fileInputTag.addEventListener("change", (event) => {
     }
 });
 
+
+
+
+
+// On écoute l'évènement "submite" pour créer un nouveau work dans la base de données
 formToAddImageTag.addEventListener("submit", (event) => {
     event.preventDefault();
- 
     const fileInputValue = fileInputTag.value;
     const titleValue = titleTag.value;
     const categorieValue = categorieTag.value;
-    
     const allFieldsFilled = {
         imageUrl: fileInputValue,
         title: titleValue,
@@ -163,24 +157,28 @@ formToAddImageTag.addEventListener("submit", (event) => {
 
 
 
-
-
+// Fonction pour gérer le changement de couleur du Bouton "Valider" de la modale 2
+btnValiderTag.style.backgroundColor = "#A7A7A7";
 
 
 
 // Fonction pour vérifier si tous les champs sont remplis
 function checkingFields() {
-    let allFieldsFilled = true;
-    allFieldsModal2.forEach(field => {
+    const allFieldsFilled = {
+        imageUrl: fileInputValue,
+        title: titleValue,
+        category: categorieValue,
+    }
+    let allFieldsFilledModal2 = true;
+    allFieldsFilled.forEach(field => {
         if (field.value.trim() === "") {
             allFieldsFilled = false;
-        }
+        } 
     }); 
     return allFieldsFilled;
 };
 
 // Fonction pour mettre à jour la couleur du bouton
-btnValiderTag.style.backgroundColor = "#A7A7A7";
 function updateBtnColor() {
     if (checkingFields()) {
         btnSubmitTag.classList.add("filled"); // Rempli
@@ -190,7 +188,6 @@ function updateBtnColor() {
 };
 
 
-//updateBtnColor();
 
 // Fonction pour gérer l'ajout d'images et titres dans la page d'accueil et dans la modale 
 

@@ -43,11 +43,12 @@ const frameIconTags = document.getElementsByClassName("frameIcon");
 const btnModalAddTag = document.querySelector(".btnModalAdd");
 const btnValiderTag = document.querySelector(".btnValider");
 
-// Variable pour gérer le changement de couleur du Bouton "Valider" de la modale 2
-//const btnSubmitTag = document.getElementById("btnSubmit");
+// Variable pour récupérer les valeurs des champs de la modale 2
 const formToAddImageTag = document.getElementById("formToAddImage");
 const fileInputTag = document.getElementById("fileInput");
 const titleTag = document.getElementById("title");
 const categorieTag = document.getElementById("categorie");
 const previewImageTag = document.getElementById('previewImage');
 
+// Variable pour gérer le changement de couleur du Bouton "Valider" de la modale 2
+const btnValider = document.getElementById("btnSubmit");
