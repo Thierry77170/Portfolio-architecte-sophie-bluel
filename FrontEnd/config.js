@@ -53,8 +53,5 @@ const galleryModalTag = document.querySelector(".galleryModal");
 const galleryTag = document.querySelector(".gallery");
 
 
-
-
-
 // Variable pour gérer le changement de couleur du Bouton "Valider" de la modale 2
 const btnValider = document.getElementById("btnSubmit");

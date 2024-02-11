@@ -7,7 +7,7 @@ invisibleElements();
 
 // Fonction pour afficher les éléments au chargement de la page et de la modale
 getWorks();
-loadingImagesForModal ()
+loadingImagesForModal ();
 
 // Évènement pour gérer le click des filtres
 for (let i = 0; i < btnSorting.length; i++) {
@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
     } 
 });
 
-
 // Gestion des modales
 // Modales invisibles par défault géré par le CSS
 // Fermeture des modales au click sur les croix
@@ -78,14 +77,6 @@ arrowLeftTag.addEventListener("click", ()=> {
     openModal.style.display = "flex"; 
 });
 
-
-
-
-
-
-
-
-
 // On écoute le changement dans le champ input="file" pour afficher la previewImage
 fileInputTag.addEventListener("change", (event) => {
     // On vérifie d'abord si un fichier a été sélectionné en accédant à event.target.files[0]
@@ -106,40 +97,33 @@ fileInputTag.addEventListener("change", (event) => {
     }
 });
 
-
-
-
-
-
-
 // On écoute l'évènement "submite" pour créer un nouveau work dans la base de données
 formToAddImageTag.addEventListener("submit", (event) => {
     event.preventDefault();
-
-    // On récupére le fichier image sélectionné par l'utilisateur
-    const imageFile = previewImageTag;
-    const titleValue = titleTag.value;
-    const categorieValue = categorieTag.value;
-    //console.log(imageFile); 
-    //console.log(titleValue);
-    //console.log(categorieValue); 
-
-    const newWork = {
-        image: imageFile, 
-        title: titleValue,
-        category: categorieValue
+    let formData = new FormData();
+    // Ajout de l'image directement depuis l'input type="file"
+    const imageFile = fileInputTag.files[0];
+    if (imageFile) {
+        formData.append('image', imageFile);
     }
-    console.log(newWork);
- 
+    // Ajout du titre
+    const titleValue = titleTag.value;
+    formData.append('title', titleValue);
+
+    // Ajout de la catégorie, convertie en chiffre entier
+    const categoryValue = parseInt(categorieTag.value, 10);
+    formData.append('category', categoryValue);
+    console.log("image", formData.get('image'))
+    console.log("title", formData.get('title'))
+    console.log("category", formData.get('category'))
     //Variable pour la requête 
     const req = {
         method: "POST",
         headers: {
             "accept" : "application/json",
-            "Content-Type": "multipart/form-data",
             "Authorization" : `Bearer ${token}`,
             },
-        body: JSON.stringify(newWork)
+        body: formData
     };
     // Effectuer la requête POST avec fetch() pour créer un nouveau work
     fetch("http://localhost:5678/api/works", req)
@@ -185,52 +169,43 @@ formToAddImageTag.addEventListener("submit", (event) => {
     //.catch(error => console.error("erreur lors de la récupération des données"));
 });
     
-
-
-
-
-
-
-
-
-
 // Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
-function deleteImage() {
-    for (i = 0; i <  frameIconTags.length; i++) {
-        //Variable pour la requête de la supression de l'image
-        const req = {
-            method: "DELETE",
-            headers: {
-                "accept" : "*/*",
-                "Authorization" : `Bearer ${token}`,
-                },
-        };
-        frameIconTags[i].addEventListener("click", (event) => {
-            fetch(`http://localhost:5678/api/works/` + [i], req) 
-            .then(res => {
-                if (res.status  !== 200) {
-                    console.log("suppression de l'image échoué")
-                }
-                return res.json()
-            })
-            .then(dataWork => {
-                if (dataWork.status  === 200) {
-                    console.log("suppression de l'image réussi");
-                    if (worksTags === "") {
-                        // Suppression des balises images avec les titres pour la page d'accueil
-                        galleryTag.removeChild(worksTags);
-                    }
-                    if (worksModaleTag === "") {
-                        // Suppression des balises images avec pour la modale
-                        worksModaleTag.removeChild(worksTags);
-                    }
-                    
-                }           
-            })
-        });
-    };
-};
+async function deleteImage(imageId) {
 
+        try {
+            const req = {
+                method: "DELETE",
+                headers: {
+                    "accept": "*/*",
+                    "Authorization": `Bearer ${token}`,
+                },
+            };
+
+            const response = await fetch(`http://localhost:5678/api/works/${imageId}`, req);
+            
+            if (response.ok) {
+                console.log("La suppression de l'image a réussi");
+
+                 // On supprimer l'image de la galerie sur la page d'accueil
+                const imageGallery = document.querySelector(".works");
+                const imageToRemove = imageGallery.querySelector(`[data-id="${imageId}"]`);
+            if (imageToRemove) {
+                imageGallery.removeChild(imageToRemove);
+            }
+
+            // Supprimer l'image de la modale
+            const imageModal = document.querySelector(`.worksModale[data-id="${imageId}"]`);
+            if (imageModal) {
+                imageModal.remove();
+            }
+            } else {
+                console.log("La suppression de l'image a échoué");
+                throw new Error("La suppression de l'image a échoué");
+            }
+        } catch (error) {
+            //console.error("Une erreur s'est produite lors de la suppression de l'image :", error);
+        }
+}
 
 
 

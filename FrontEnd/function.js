@@ -162,33 +162,45 @@ function invisibleElements() {
 };
 
 // Fonction pour gérer l'affichage des images de la modale
-async function loadingImagesForModal () {
-    // Récupération des images par l'API
-    await fetch("http://localhost:5678/api/works")
-    .then(reponse => reponse.json())
-    .then(dataWorks => {   
-        const imagesUrl = dataWorks.map(work => work.imageUrl);         
-        // Récupération des balises parents pour les images dans "config.js"            
-        // Création des balises image[i] et de l'icone delete
+async function loadingImagesForModal() {
+    try {
+        const response = await fetch("http://localhost:5678/api/works");
+        const dataWorks = await response.json();
+        console.log("dataWorks", dataWorks);
+      
+        const imagesUrl = dataWorks.map(work => work.imageUrl);
+        console.log("imagesUrl", imagesUrl);
+
         for (let i = 0; i < imagesUrl.length; i++) {
             const figureTag = document.createElement("figure");
             const imagesTags = document.createElement("img");
-            const spanDeleteTag = document.createElement("span"); 
+            const spanDeleteTag = document.createElement("span");
             const deleteTag = document.createElement("i");
-            
+
             figureTag.classList.add("worksModale");
-            imagesTags.src = imagesUrl[i];  
-            spanDeleteTag.classList.add("frameIcon"); 
-            deleteTag.classList.add("fa-solid");
-            deleteTag.classList.add("fa-trash-can");
-            
-            // implémentation des balises image[i]  dans la modale
+            imagesTags.src = imagesUrl[i];
+            imagesTags.setAttribute("data-id", dataWorks[i].id);
+            spanDeleteTag.classList.add("frameIcon");
+            deleteTag.classList.add("fa-solid", "fa-trash-can");
+
             spanDeleteTag.appendChild(deleteTag);
             figureTag.appendChild(imagesTags);
-            figureTag.appendChild(spanDeleteTag); 
-            galleryModalTag.appendChild(figureTag);   
+            figureTag.appendChild(spanDeleteTag);
+            galleryModalTag.appendChild(figureTag);
+
+            // On ajoute un gestionnaire d'événements au clic sur spanDeleteTag
+            spanDeleteTag.addEventListener("click", (event) => {
+                // Utilisez event.target.closest() pour trouver l'élément figure parent
+                const figureTag = event.target.closest("figure");
+                if (figureTag) {
+                    // On accède à l'ID de l'image à partir de l'élément figure
+                    const imageId = figureTag.querySelector("img").getAttribute("data-id");
+                    // On appel la fonction deleteImage() avec l'ID de l'image
+                    deleteImage(imageId); 
+                }
+            });
         }
-        deleteImage();
-    })
-    .catch(error => console.error("erreur lors de la récupération des données"));
-};
+    } catch (error) {
+       console.error("erreur lors de la récupération des données :", error);
+    }
+}
