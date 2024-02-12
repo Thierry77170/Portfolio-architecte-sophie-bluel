@@ -204,3 +204,48 @@ async function loadingImagesForModal() {
        console.error("erreur lors de la récupération des données :", error);
     }
 }
+
+// Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
+async function deleteImage(imageId) {
+    try {
+        const req = {
+            method: "DELETE",
+            headers: {
+                "accept": "*/*",
+                "Authorization": `Bearer ${token}`,
+            },
+        };
+        const response = await fetch(`http://localhost:5678/api/works/${imageId}`, req);     
+        if (response.ok) {
+            console.log("La suppression de l'image a réussi");
+
+             // On supprimer l'image de la galerie sur la page d'accueil
+            const imageGallery = document.querySelector(".works");
+            const imageToRemove = imageGallery.querySelector(`[data-id="${imageId}"]`);
+        if (imageToRemove) {
+            imageGallery.removeChild(imageToRemove);
+        }
+        // Supprimer l'image de la modale
+        const imageModal = document.querySelector(`.worksModale[data-id="${imageId}"]`);
+        if (imageModal) {
+            imageModal.remove();
+        }
+        } else {
+            console.log("La suppression de l'image a échoué");
+            throw new Error("La suppression de l'image a échoué");
+        }
+    } catch (error) {
+        //console.error("Une erreur s'est produite lors de la suppression de l'image :", error);
+    }
+}
+
+// Fonction pour fermer la modal en cliquant à l'extérieur de la <div class="modalWrapper">
+function modalClosure() {
+    // On cache la modale en changeant son style d'affichage
+    if (openModal) {
+        openModal.style.display = "none"; 
+    }
+   if ( openModal2) {
+    openModal2.style.display = "none"; 
+   }
+}

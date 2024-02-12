@@ -35,13 +35,13 @@ const openModal2 = document.getElementById("modal2");
 const closeModal2 = document.querySelector(".close2");
 const worksModaleTag = document.querySelectorAll(".worksModale");
 const arrowLeftTag = document.querySelector(".arrowLeft");
+modalWrapper = document.querySelector(".modalWrapper");
 
 // Variable pour gérer la supression d'images dans la modale et la page d'accueil
 const frameIconTags = document.getElementsByClassName("frameIcon");
 
 // Variable pour gérer l'ajout d'images et de titres dans la page d'accueil et dans la modale 
 const btnModalAddTag = document.querySelector(".btnModalAdd");
-const btnValiderTag = document.querySelector(".btnValider");
 
 // Variable pour récupérer les valeurs des champs de la modale 2 et créeer un nouveau work
 const formToAddImageTag = document.getElementById("formToAddImage");
@@ -54,4 +54,8 @@ const galleryTag = document.querySelector(".gallery");
 
 
 // Variable pour gérer le changement de couleur du Bouton "Valider" de la modale 2
+const btnValiderTag = document.querySelector(".btnValider");
 const btnValider = document.getElementById("btnSubmit");
+// On sélectionne tous les champs du formulaire
+const formFields = document.querySelectorAll("#fileInput,  #formToAddImage input[type='text'], #formToAddImage select");
+

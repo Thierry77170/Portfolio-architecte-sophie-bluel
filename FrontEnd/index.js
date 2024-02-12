@@ -106,15 +106,14 @@ formToAddImageTag.addEventListener("submit", (event) => {
     if (imageFile) {
         formData.append('image', imageFile);
     }
+    console.log("image", formData.get('image'))
     // Ajout du titre
     const titleValue = titleTag.value;
     formData.append('title', titleValue);
-
+    console.log("title", formData.get('title'))
     // Ajout de la catégorie, convertie en chiffre entier
     const categoryValue = parseInt(categorieTag.value, 10);
     formData.append('category', categoryValue);
-    console.log("image", formData.get('image'))
-    console.log("title", formData.get('title'))
     console.log("category", formData.get('category'))
     //Variable pour la requête 
     const req = {
@@ -141,12 +140,12 @@ formToAddImageTag.addEventListener("submit", (event) => {
         console.log(imagesTags);
         const spanDeleteTag = document.createElement("span");
         const deleteTag = document.createElement("i");
-      
+         // Création des attribut pour les balises et implémentation de l'image dans la balise image
         figureTagModal.classList.add("worksModale");   
         imagesTags.src = imagesUrl;      
         spanDeleteTag.classList.add("frameIcon");
         deleteTag.classList.add("fa-solid, fa-trash-can");
-
+        // Implémentation des balises enfants dans les balises parents
         galleryModalTag.appendChild(figureTagModal); 
         figureTagModal.appendChild(imagesTags);
         figureTagModal.appendChild(spanDeleteTag);
@@ -157,78 +156,57 @@ formToAddImageTag.addEventListener("submit", (event) => {
         const images2Tags = document.createElement("img"); 
         console.log(images2Tags);
         const figcaptionTag = document.createElement("figcaption"); 
-
+        // Création des attribut pour les balises et implémentation de l'image dans la balise image
         figureTag.classList.add("works");
         images2Tags.src = imagesUrl;
         figcaptionTag.innerText = title; 
-        
+        // Implémentation des balises enfants dans les balises parents
         galleryTag.appendChild(figureTag);
         figureTag.appendChild(images2Tags);
         figureTag.appendChild(figcaptionTag);
     })
     //.catch(error => console.error("erreur lors de la récupération des données"));
 });
-    
-// Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
-async function deleteImage(imageId) {
 
-        try {
-            const req = {
-                method: "DELETE",
-                headers: {
-                    "accept": "*/*",
-                    "Authorization": `Bearer ${token}`,
-                },
-            };
-
-            const response = await fetch(`http://localhost:5678/api/works/${imageId}`, req);
-            
-            if (response.ok) {
-                console.log("La suppression de l'image a réussi");
-
-                 // On supprimer l'image de la galerie sur la page d'accueil
-                const imageGallery = document.querySelector(".works");
-                const imageToRemove = imageGallery.querySelector(`[data-id="${imageId}"]`);
-            if (imageToRemove) {
-                imageGallery.removeChild(imageToRemove);
-            }
-
-            // Supprimer l'image de la modale
-            const imageModal = document.querySelector(`.worksModale[data-id="${imageId}"]`);
-            if (imageModal) {
-                imageModal.remove();
-            }
-            } else {
-                console.log("La suppression de l'image a échoué");
-                throw new Error("La suppression de l'image a échoué");
-            }
-        } catch (error) {
-            //console.error("Une erreur s'est produite lors de la suppression de l'image :", error);
-        }
-}
-
-
-
-
-
-// Fonction pour gérer le changement de couleur du Bouton "Valider" de la modale 2
+//  On applique la couleur par défaut à la couleur du Bouton "Valider" de la modale 2
 btnValiderTag.style.backgroundColor = "#A7A7A7";
+// On écoutez l'événement de modification pour chaque champ
+formFields.forEach(field => {
+    field.addEventListener('input', () => {
+        // On vérifie si tous les champs sont remplis
+        const allFieldsFilled = Array.from(formFields).every(field => {
+            if (field.type === 'file') {
+                return field.files.length > 0;
+            }
+            return field.value.trim() !== '';
+        });
+        // Si tous les champs sont remplis, changez la couleur du bouton Valider
+        if (allFieldsFilled) {
+            btnValider.style.backgroundColor = "#1D6154";
+        } else {
+            // Sinon, réinitialisez la couleur du bouton Valider
+            btnValider.style.backgroundColor = "#A7A7A7"; 
+        }
+    });
+});
+
+//  On écoute l'évènement  pour fermer la modal en cliquant à l'extérieur de la <div class="modalWrapper">
+openModal.addEventListener("click", (event) => {
+    // Si l'élément cliqué n'est pas contenu dans la modalWrapper, alors on ferme la modal
+    if (!modalWrapper.contains(event.target)) {
+        // On appelle la fonction pour fermer la modal
+        modalClosure(); 
+    }
+});
+
+openModal2.addEventListener("click", (event) => {
+    // Si l'élément cliqué n'est pas contenu dans la modalWrapper, alors on ferme la modal
+    if (!formToAddImage.contains(event.target)) {
+        // On appelle la fonction pour fermer la modal
+        modalClosure(); 
+    }
+});
 
 
 
 
-
-
-
-
-
-
-
-    
-
-
-
-
-    
-
-    
