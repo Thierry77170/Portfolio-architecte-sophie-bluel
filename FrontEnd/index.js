@@ -39,7 +39,7 @@ formIndex.addEventListener("submit", (event) => {
 
 // On transforme le lien "login" en "logout" lorsque l'utilisateur est connecté
 document.addEventListener("DOMContentLoaded", () => {
-    // Vérifier si le token est présent dans le localStorage avec la variable dans config.js
+    // On vérifie si le token est présent dans le localStorage (variable dans config.js)
     // On sélectionne le lien "logout" dans la page index.html la variable dans config.js
     // Si le token est présent, l'utilisateur est connecté
     if (token) {
@@ -86,8 +86,8 @@ fileInputTag.addEventListener("change", (event) => {
         const reader = new FileReader();
         // On applique la propriété onload qui met à jour la source de l'image de prévisualisation
         reader.onload = (e) => {
-            previewImage.src = e.target.result;
-            previewImage.style.display = 'block';
+            previewImageTag.src = e.target.result;
+            previewImageTag.style.display = 'block';
         };
         //  On lit le contenu du fichier spécifié en tant qu'URL de données (data URL).
         reader.readAsDataURL(selectedFile);
