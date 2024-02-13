@@ -269,6 +269,9 @@ html, body {
 .error {
 	margin-bottom: 33.6px;
 	text-align: center;
+	color: red;
+	font-size: 16px;
+	font-weight: 900;
 }
 .modal {
 	position: fixed;

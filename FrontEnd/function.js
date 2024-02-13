@@ -195,7 +195,7 @@ async function loadingImagesForModal() {
                     // On accède à l'ID de l'image à partir de l'élément figure
                     const imageId = figureTag.querySelector("img").getAttribute("data-id");
                     // On appel la fonction deleteImage() avec l'ID de l'image
-                    deleteImage(imageId); 
+                    deleteImage(imageId, event); 
                 }
             });
         }
@@ -205,8 +205,9 @@ async function loadingImagesForModal() {
 }
 
 // Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
-async function deleteImage(imageId) {
-    try {
+async function deleteImage(imageId, event) {
+    try {      
+        event.preventDefault();
         const req = {
             method: "DELETE",
             headers: {
@@ -234,7 +235,7 @@ async function deleteImage(imageId) {
             throw new Error("La suppression de l'image a échoué");
         }
     } catch (error) {
-        //console.error("Une erreur s'est produite lors de la suppression de l'image :", error);
+       // console.error("Une erreur s'est produite lors de la suppression de l'image :", error);
     }
 }
 

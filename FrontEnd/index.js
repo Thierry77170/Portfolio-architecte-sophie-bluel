@@ -144,7 +144,8 @@ formToAddImageTag.addEventListener("submit", (event) => {
         figureTagModal.classList.add("worksModale");   
         imagesTags.src = imagesUrl;      
         spanDeleteTag.classList.add("frameIcon");
-        deleteTag.classList.add("fa-solid, fa-trash-can");
+        deleteTag.classList.add("fa-solid");
+        deleteTag.classList.add("fa-trash-can");
         // Implémentation des balises enfants dans les balises parents
         galleryModalTag.appendChild(figureTagModal); 
         figureTagModal.appendChild(imagesTags);
@@ -206,6 +207,7 @@ openModal2.addEventListener("click", (event) => {
         modalClosure(); 
     }
 });
+
 
 
 
