@@ -52,10 +52,11 @@ const previewImageTag = document.getElementById("previewImage");
 const galleryModalTag = document.querySelector(".galleryModal");
 const galleryTag = document.querySelector(".gallery");
 
-
 // Variable pour gérer le changement de couleur du Bouton "Valider" de la modale 2
 const btnValiderTag = document.querySelector(".btnValider");
 const btnValider = document.getElementById("btnSubmit");
-// On sélectionne tous les champs du formulaire
+// On sélectionne tous les champs du formulaire de la modale 2
 const formFields = document.querySelectorAll("#fileInput,  #formToAddImage input[type='text'], #formToAddImage select");
 
+// Variable pour vérifier si tous les champs de la modale 2 sont remplis
+const errorModal2 = document.querySelector(".centerTheElements");

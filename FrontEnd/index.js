@@ -100,83 +100,101 @@ fileInputTag.addEventListener("change", (event) => {
 // On écoute l'évènement "submite" pour créer un nouveau work dans la base de données
 formToAddImageTag.addEventListener("submit", (event) => {
     event.preventDefault();
-    let formData = new FormData();
-    // Ajout de l'image directement depuis l'input type="file"
-    const imageFile = fileInputTag.files[0];
-    if (imageFile) {
-        formData.append('image', imageFile);
+    // On vérifie si les champs requis sont vides
+    if (!fileInputTag.files[0] || !titleTag.value || !categorieTag.value) {
+        // On affiche un message d'erreur 
+        let existingErrorTag = document.querySelector('.error');
+        if (!existingErrorTag) {
+            // On crée un nouvel élément d'erreur uniquement s'il n'existe pas déjà
+            let errorTag = document.createElement("p");
+            errorTag.innerText = "Veuillez remplir tous les champs du formulaire.";
+            errorModal2.appendChild(errorTag);
+            errorTag.classList.add("errorModal2");
+        }
+        console.log("Veuillez remplir tous les champs du formulaire.");
+        return; 
+    } else {
+        let formData = new FormData();
+        // Ajout de l'image directement depuis l'input type="file"
+        const imageFile = fileInputTag.files[0];
+        if (imageFile) {
+            formData.append('image', imageFile);
+        }
+        console.log("image", formData.get('image'))
+        // Ajout du titre
+        const titleValue = titleTag.value;
+        formData.append("title", titleValue);
+        console.log("title", formData.get('title'))
+        // Ajout de la catégorie, convertie en chiffre entier
+        const categoryValue = parseInt(categorieTag.value, 10);
+        formData.append("category", categoryValue);
+        console.log("category", formData.get('category'))
+        //Variable pour la requête 
+        const req = {
+            method: "POST",
+            headers: {
+                "accept" : "application/json",
+                "Authorization" : `Bearer ${token}`,
+                },
+            body: formData
+        };
+        // Effectuer la requête POST avec fetch() pour créer un nouveau work
+        fetch("http://localhost:5678/api/works", req)
+        .then(res => {
+            return res.json();
+        })
+        .then(dataWork => {   
+            // Traitement de la réponse serveur
+            const imagesUrl = dataWork.imageUrl;         
+            const title = dataWork.title;    
+    
+            // Création des balises images avec l'icone delete pour la modale
+            const figureTagModal = document.createElement("figure"); 
+            const imagesTags = document.createElement("img");
+            console.log(imagesTags);
+            const spanDeleteTag = document.createElement("span");
+            const deleteTag = document.createElement("i");
+             // Création des attribut pour les balises et implémentation de l'image dans la balise image
+            figureTagModal.classList.add("worksModale");   
+            imagesTags.src = imagesUrl;      
+            spanDeleteTag.classList.add("frameIcon");
+            deleteTag.classList.add("fa-solid");
+            deleteTag.classList.add("fa-trash-can");
+            // Implémentation des balises enfants dans les balises parents
+            galleryModalTag.appendChild(figureTagModal); 
+            figureTagModal.appendChild(imagesTags);
+            figureTagModal.appendChild(spanDeleteTag);
+            spanDeleteTag.appendChild(deleteTag);
+    
+            // Création des balises images avec les titres pour la page d'accueil
+            const figureTag = document.createElement("figure"); 
+            const images2Tags = document.createElement("img"); 
+            console.log(images2Tags);
+            const figcaptionTag = document.createElement("figcaption"); 
+            // Création des attribut pour les balises et implémentation de l'image dans la balise image
+            figureTag.classList.add("works");
+            images2Tags.src = imagesUrl;
+            figcaptionTag.innerText = title; 
+            // Implémentation des balises enfants dans les balises parents
+            galleryTag.appendChild(figureTag);
+            figureTag.appendChild(images2Tags);
+            figureTag.appendChild(figcaptionTag);
+
+           // On réinitialise les valeurs des champs du formulaire
+           window.location.href = "index.html";
+        })
+        //.catch(error => console.error("erreur lors de la récupération des données"));
     }
-    console.log("image", formData.get('image'))
-    // Ajout du titre
-    const titleValue = titleTag.value;
-    formData.append('title', titleValue);
-    console.log("title", formData.get('title'))
-    // Ajout de la catégorie, convertie en chiffre entier
-    const categoryValue = parseInt(categorieTag.value, 10);
-    formData.append('category', categoryValue);
-    console.log("category", formData.get('category'))
-    //Variable pour la requête 
-    const req = {
-        method: "POST",
-        headers: {
-            "accept" : "application/json",
-            "Authorization" : `Bearer ${token}`,
-            },
-        body: formData
-    };
-    // Effectuer la requête POST avec fetch() pour créer un nouveau work
-    fetch("http://localhost:5678/api/works", req)
-    .then(res => {
-        return res.json();
-    })
-    .then(dataWork => {   
-        // Traitement de la réponse serveur
-        const imagesUrl = dataWork.imageUrl;         
-        const title = dataWork.title;    
-
-        // Création des balises images avec l'icone delete pour la modale
-        const figureTagModal = document.createElement("figure"); 
-        const imagesTags = document.createElement("img");
-        console.log(imagesTags);
-        const spanDeleteTag = document.createElement("span");
-        const deleteTag = document.createElement("i");
-         // Création des attribut pour les balises et implémentation de l'image dans la balise image
-        figureTagModal.classList.add("worksModale");   
-        imagesTags.src = imagesUrl;      
-        spanDeleteTag.classList.add("frameIcon");
-        deleteTag.classList.add("fa-solid");
-        deleteTag.classList.add("fa-trash-can");
-        // Implémentation des balises enfants dans les balises parents
-        galleryModalTag.appendChild(figureTagModal); 
-        figureTagModal.appendChild(imagesTags);
-        figureTagModal.appendChild(spanDeleteTag);
-        spanDeleteTag.appendChild(deleteTag);
-
-        // Création des balises images avec les titres pour la page d'accueil
-        const figureTag = document.createElement("figure"); 
-        const images2Tags = document.createElement("img"); 
-        console.log(images2Tags);
-        const figcaptionTag = document.createElement("figcaption"); 
-        // Création des attribut pour les balises et implémentation de l'image dans la balise image
-        figureTag.classList.add("works");
-        images2Tags.src = imagesUrl;
-        figcaptionTag.innerText = title; 
-        // Implémentation des balises enfants dans les balises parents
-        galleryTag.appendChild(figureTag);
-        figureTag.appendChild(images2Tags);
-        figureTag.appendChild(figcaptionTag);
-    })
-    //.catch(error => console.error("erreur lors de la récupération des données"));
 });
 
 //  On applique la couleur par défaut à la couleur du Bouton "Valider" de la modale 2
 btnValiderTag.style.backgroundColor = "#A7A7A7";
 // On écoutez l'événement de modification pour chaque champ
 formFields.forEach(field => {
-    field.addEventListener('input', () => {
+    field.addEventListener("input", () => {
         // On vérifie si tous les champs sont remplis
         const allFieldsFilled = Array.from(formFields).every(field => {
-            if (field.type === 'file') {
+            if (field.type === "file") {
                 return field.files.length > 0;
             }
             return field.value.trim() !== '';
@@ -208,6 +226,20 @@ openModal2.addEventListener("click", (event) => {
     }
 });
 
+
+
+
+
+
+
+
+ 
+
+
+
+
+  
+    
 
 
 

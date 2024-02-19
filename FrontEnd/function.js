@@ -46,7 +46,7 @@ async function getWorks() {
             galleryTag.appendChild(figureTag);      
         }
     })
-    .catch(error => console.error("erreur lors de la récupération des données"));
+    //.catch(error => console.error("erreur lors de la récupération des données"));
 };
 
 // Fonction pour gérer le bouton "Objets" du filtre au click
@@ -165,10 +165,8 @@ async function loadingImagesForModal() {
     try {
         const response = await fetch("http://localhost:5678/api/works");
         const dataWorks = await response.json();
-        console.log("dataWorks", dataWorks);
       
         const imagesUrl = dataWorks.map(work => work.imageUrl);
-        console.log("imagesUrl", imagesUrl);
 
         for (let i = 0; i < imagesUrl.length; i++) {
             const figureTag = document.createElement("figure");
@@ -196,6 +194,7 @@ async function loadingImagesForModal() {
                     const imageId = figureTag.querySelector("img").getAttribute("data-id");
                     // On appel la fonction deleteImage() avec l'ID de l'image
                     deleteImage(imageId, event); 
+                    window.location.href = "index.html"; 
                 }
             });
         }
@@ -205,9 +204,9 @@ async function loadingImagesForModal() {
 }
 
 // Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
-async function deleteImage(imageId, event) {
+async function deleteImage(imageId, evnt) {
     try {      
-        event.preventDefault();
+        //event.preventDefault();
         const req = {
             method: "DELETE",
             headers: {
@@ -222,6 +221,7 @@ async function deleteImage(imageId, event) {
              // On supprimer l'image de la galerie sur la page d'accueil
             const imageGallery = document.querySelector(".works");
             const imageToRemove = imageGallery.querySelector(`[data-id="${imageId}"]`);
+            console.log( imageToRemove);
         if (imageToRemove) {
             imageGallery.removeChild(imageToRemove);
         }
@@ -235,7 +235,7 @@ async function deleteImage(imageId, event) {
             throw new Error("La suppression de l'image a échoué");
         }
     } catch (error) {
-       // console.error("Une erreur s'est produite lors de la suppression de l'image :", error);
+       console.error("Une erreur s'est produite lors de la suppression de l'image :", error);
     }
 }
 

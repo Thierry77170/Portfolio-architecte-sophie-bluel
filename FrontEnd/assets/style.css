@@ -438,7 +438,6 @@ html, body {
 	padding-left: 15px;
 	box-shadow: 0px 4px 14px 0px #00000017;
 	border: none;
-
 }
 .centerTheElements select {
 	width: 420px;
@@ -468,4 +467,11 @@ html, body {
 	max-width: calc(100vw - 15%);
 	height: 240px;
 	position: absolute;
+}
+.errorModal2 {
+	margin-top: 50px;
+	text-align: center;
+	color: red;
+	font-size: 16px;
+	font-weight: 900;
 }
