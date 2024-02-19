@@ -181,11 +181,8 @@ formToAddImageTag.addEventListener("submit", (event) => {
             galleryTag.appendChild(figureTag);
             figureTag.appendChild(images2Tags);
             figureTag.appendChild(figcaptionTag);
-
-           // On réinitialise les valeurs des champs du formulaire
-           window.location.href = "index.html";
         })
-        //.catch(error => console.error("erreur lors de la récupération des données"));
+        .catch(error => console.error("erreur lors de la récupération des données"));
     }
 });
 

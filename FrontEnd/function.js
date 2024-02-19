@@ -46,7 +46,7 @@ async function getWorks() {
             galleryTag.appendChild(figureTag);      
         }
     })
-    //.catch(error => console.error("erreur lors de la récupération des données"));
+    .catch(error => console.error("erreur lors de la récupération des données"));
 };
 
 // Fonction pour gérer le bouton "Objets" du filtre au click
