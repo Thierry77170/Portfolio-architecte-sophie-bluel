@@ -100,18 +100,20 @@ fileInputTag.addEventListener("change", (event) => {
 // On écoute l'évènement "submite" pour créer un nouveau work dans la base de données
 formToAddImageTag.addEventListener("submit", (event) => {
     event.preventDefault();
-    // On vérifie si les champs requis sont vides
+    // On vérifie si un message d'errur existe
+    let existingErrorTag = document.querySelector('.errorModal2');
+    if (!existingErrorTag) {
+        // On crée un nouvel élément d'erreur uniquement s'il n'existe pas déjà
+        let errorTag = document.createElement("p");
+        errorTag.innerText = "Veuillez remplir tous les champs du formulaire.";
+        errorModal2.appendChild(errorTag);
+        errorTag.classList.add("errorModal2");
+    } else {       
+          // Si un message d'erreur existe déjà, on met à jour son contenu
+        existingErrorTag.innerText = "Veuillez remplir tous les champs du formulaire.";
+    }
+     // On vérifie si les champs requis sont vides
     if (!fileInputTag.files[0] || !titleTag.value || !categorieTag.value) {
-        // On affiche un message d'erreur 
-        let existingErrorTag = document.querySelector('.error');
-        if (!existingErrorTag) {
-            // On crée un nouvel élément d'erreur uniquement s'il n'existe pas déjà
-            let errorTag = document.createElement("p");
-            errorTag.innerText = "Veuillez remplir tous les champs du formulaire.";
-            errorModal2.appendChild(errorTag);
-            errorTag.classList.add("errorModal2");
-        }
-        console.log("Veuillez remplir tous les champs du formulaire.");
         return; 
     } else {
         let formData = new FormData();
