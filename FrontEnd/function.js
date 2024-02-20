@@ -64,7 +64,6 @@ async function btnObjets () {
         // Création de la balise image[i] et de la balise titre[i]
         for (let i = 0; i < filteredObjects.length; i++) {
             const figureTag = document.createElement("figure");
-            console.log(figureTag);
             const imagesTags = document.createElement("img");
             const figcaptionTitle = document.createElement("figcaption"); 
 
@@ -97,7 +96,6 @@ async function btnAppartements () {
         // Création de la balise image[i] et de la balise titre[i]
         for (let i = 0; i < filteredAppartements.length; i++) {
             const figureTag = document.createElement("figure");
-            console.log(figureTag);
             const imagesTags = document.createElement("img");
             const figcaptionTitle = document.createElement("figcaption"); 
 
@@ -129,7 +127,6 @@ async function btnHotelEtResto () {
         // Création de la balise image[i] et de la balise titre[i]
         for (let i = 0; i < filteredHotelEtResto.length; i++) {
             const figureTag = document.createElement("figure");
-            console.log(figureTag);
             const imagesTags = document.createElement("img");
             const figcaptionTitle = document.createElement("figcaption"); 
 
@@ -235,7 +232,7 @@ async function deleteImage(imageId, evnt) {
             throw new Error("La suppression de l'image a échoué");
         }
     } catch (error) {
-       console.error("Une erreur s'est produite lors de la suppression de l'image :", error);
+       console.error("Une erreur s'est produite lors de la suppression de l'image", error);
     }
 }
 

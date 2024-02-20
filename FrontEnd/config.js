@@ -2,20 +2,20 @@
 let btnActivated = document.querySelector(".activated");
 let btnSorting = document.querySelectorAll(".btnSorting");
 
-// Récupération des balises parents des éléments pour les fonctions des filtres
+// Variable pour récupérer les balises parents des éléments pour les fonctions des filtres
 const worksTags = document.querySelectorAll(".works");
 
-// On récupère la balise form du fichier "index.html" pour empêcher le comportement par défaut "submit"
+// Variable récupèrer la balise form du fichier "index.html" pour empêcher le comportement par défaut "submit"
 const formIndex = document.getElementById("formIndex");  
 
-// On récupère la balise form du fichier "login.html" pour empêcher le comportement par défaut "submit"
+// Variable pour récupèrer la balise form du fichier "login.html" pour empêcher le comportement par défaut "submit"
 const formLogin = document.getElementById("formLogin");  
 
-// On récupère les balises dans le fichier "login.html" pour gérer la validation ou erreur de connexion
+// Variable récupèrer les balises dans le fichier "login.html" pour gérer la validation ou erreur de connexion
 const emailTag = document.getElementById("email");
 const motDePasseTag = document.getElementById("motDePasse");
 
-// Sélectionner le lien "logout" dans la page index.html lorsque l'utilisateur est connecté
+// Variable pour sélectionner le lien "logout" dans la page index.html lorsque l'utilisateur est connecté
 const logout = document.getElementById("logout");
 
 // Variable pour gérer l'affichage des boutons du filtre à la connection de l'utilisateur
@@ -55,7 +55,7 @@ const galleryTag = document.querySelector(".gallery");
 // Variable pour gérer le changement de couleur du Bouton "Valider" de la modale 2
 const btnValiderTag = document.querySelector(".btnValider");
 const btnValider = document.getElementById("btnSubmit");
-// On sélectionne tous les champs du formulaire de la modale 2
+// Variable pour sélectionner tous les champs du formulaire de la modale 2
 const formFields = document.querySelectorAll("#fileInput,  #formToAddImage input[type='text'], #formToAddImage select");
 
 // Variable pour vérifier si tous les champs de la modale 2 sont remplis
