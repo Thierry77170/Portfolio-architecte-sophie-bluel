@@ -92,25 +92,28 @@ fileInputTag.addEventListener("change", (event) => {
         //  On lit le contenu du fichier spécifié en tant qu'URL de données (data URL).
         reader.readAsDataURL(selectedFile);
     } else {
-        previewImage.src = '#';
-        previewImage.style.display = 'none';
+        previewImageTag.src = '#';
+        previewImageTag.style.display = 'none';
     }
 });
 
 // On écoute l'évènement "submite" pour créer un nouveau work dans la base de données
 formToAddImageTag.addEventListener("submit", (event) => {
     event.preventDefault();
-    // On vérifie si un message d'errur existe
+    // On vérifie si un message d'erreur existe
     let existingErrorTag = document.querySelector('.errorModal2');
     if (!existingErrorTag) {
-        // On crée un nouvel élément d'erreur uniquement s'il n'existe pas déjà
-        let errorTag = document.createElement("p");
-        errorTag.innerText = "Veuillez remplir tous les champs du formulaire.";
-        errorModal2.appendChild(errorTag);
-        errorTag.classList.add("errorModal2");
-    } else {       
-          // Si un message d'erreur existe déjà, on met à jour son contenu
-        existingErrorTag.innerText = "Veuillez remplir tous les champs du formulaire.";
+         // On vérifie si les champs requis sont vides
+        if (!fileInputTag.files[0] || !titleTag.value || !categorieTag.value) {
+               // On crée un nouvel élément d'erreur uniquement s'il n'existe pas déjà
+            let errorTag= document.createElement("p");
+            errorTag.innerText = "Veuillez remplir tous les champs du formulaire.";
+            errorTag.classList.add("errorModal2");
+            centerTheElements.appendChild(errorTag);   
+        }
+    }      
+    if (fileInputTag.files[0] && titleTag.value && categorieTag.value && existingErrorTag) {
+        centerTheElements.removeChild(existingErrorTag);
     }
      // On vérifie si les champs requis sont vides
     if (!fileInputTag.files[0] || !titleTag.value || !categorieTag.value) {
@@ -118,17 +121,17 @@ formToAddImageTag.addEventListener("submit", (event) => {
     } else {
         let formData = new FormData();
         // Ajout de l'image directement depuis l'input type="file"
-        const imageFile = fileInputTag.files[0];
+        let imageFile = fileInputTag.files[0];
         if (imageFile) {
             formData.append('image', imageFile);
         }
         console.log("image", formData.get('image'))
         // Ajout du titre
-        const titleValue = titleTag.value;
+        let titleValue = titleTag.value;
         formData.append("title", titleValue);
         console.log("title", formData.get('title'))
         // Ajout de la catégorie, convertie en chiffre entier
-        const categoryValue = parseInt(categorieTag.value, 10);
+        let categoryValue = parseInt(categorieTag.value, 10);
         formData.append("category", categoryValue);
         console.log("category", formData.get('category'))
         //Variable pour la requête 
@@ -150,24 +153,6 @@ formToAddImageTag.addEventListener("submit", (event) => {
             const imagesUrl = dataWork.imageUrl;         
             const title = dataWork.title;    
     
-            // Création des balises images avec l'icone delete pour la modale
-            const figureTagModal = document.createElement("figure"); 
-            const imagesTags = document.createElement("img");
-            console.log(imagesTags);
-            const spanDeleteTag = document.createElement("span");
-            const deleteTag = document.createElement("i");
-             // Création des attribut pour les balises et implémentation de l'image dans la balise image
-            figureTagModal.classList.add("worksModale");   
-            imagesTags.src = imagesUrl;      
-            spanDeleteTag.classList.add("frameIcon");
-            deleteTag.classList.add("fa-solid");
-            deleteTag.classList.add("fa-trash-can");
-            // Implémentation des balises enfants dans les balises parents
-            galleryModalTag.appendChild(figureTagModal); 
-            figureTagModal.appendChild(imagesTags);
-            figureTagModal.appendChild(spanDeleteTag);
-            spanDeleteTag.appendChild(deleteTag);
-    
             // Création des balises images avec les titres pour la page d'accueil
             const figureTag = document.createElement("figure"); 
             const images2Tags = document.createElement("img"); 
@@ -181,6 +166,9 @@ formToAddImageTag.addEventListener("submit", (event) => {
             galleryTag.appendChild(figureTag);
             figureTag.appendChild(images2Tags);
             figureTag.appendChild(figcaptionTag);
+            // On réinitialise la modal 2
+            galleryModalTag .innerHTML = "";
+            loadingImagesForModal() 
         })
         .catch(error => console.error("erreur lors de la récupération des données"));
     }

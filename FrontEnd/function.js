@@ -201,7 +201,7 @@ async function loadingImagesForModal() {
 }
 
 // Fonction pour gérer la supression d'une image dans la modale et  la page d'accueil
-async function deleteImage(imageId, evnt) {
+async function deleteImage(imageId, event) {
     try {      
         //event.preventDefault();
         const req = {

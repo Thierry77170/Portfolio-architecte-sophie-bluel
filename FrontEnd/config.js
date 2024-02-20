@@ -59,4 +59,4 @@ const btnValider = document.getElementById("btnSubmit");
 const formFields = document.querySelectorAll("#fileInput,  #formToAddImage input[type='text'], #formToAddImage select");
 
 // Variable pour vérifier si tous les champs de la modale 2 sont remplis
-const errorModal2 = document.querySelector(".centerTheElements");
+const centerTheElements = document.querySelector(".centerTheElements");
