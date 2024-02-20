@@ -167,11 +167,16 @@ formToAddImageTag.addEventListener("submit", (event) => {
             figureTag.appendChild(images2Tags);
             figureTag.appendChild(figcaptionTag);
             // On réinitialise la modal 2
-            galleryModalTag .innerHTML = "";
-            loadingImagesForModal() 
+            galleryModalTag.innerHTML = "";
+            loadingImagesForModal() ;
+            titleTag.value = '';
+            categorieTag.value = '';
+            previewImageTag.src = "#";
+            previewImageTag.removeAttribute("style");
         })
         .catch(error => console.error("erreur lors de la récupération des données"));
     }
+
 });
 
 //  On applique la couleur par défaut à la couleur du Bouton "Valider" de la modale 2
