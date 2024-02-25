@@ -123,17 +123,17 @@ formToAddImageTag.addEventListener("submit", (event) => {
         // Ajout de l'image directement depuis l'input type="file"
         let imageFile = fileInputTag.files[0];
         if (imageFile) {
-            formData.append('image', imageFile);
+            formData.append("image", imageFile);
         }
-        console.log("image", formData.get('image'))
+        console.log("image", formData.get("image"))
         // Ajout du titre
         let titleValue = titleTag.value;
         formData.append("title", titleValue);
-        console.log("title", formData.get('title'))
+        console.log("title", formData.get("title"))
         // Ajout de la catégorie, convertie en chiffre entier
         let categoryValue = parseInt(categorieTag.value, 10);
         formData.append("category", categoryValue);
-        console.log("category", formData.get('category'))
+        console.log("category", formData.get("category"))
         //Variable pour la requête 
         const req = {
             method: "POST",
